@@ -5,25 +5,38 @@
 #include <clocale>
 #include <cstdlib>
 
+void handleInputError() {
+    std::cin.clear(); // Wyczyszczenie flag błędu
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Wyczyszczenie bufora wejścia
+}
+
 int main() {
     setlocale(LC_ALL, "pl_PL.UTF-8");
     while (1) {
         // MENU
         std::system("cls");
-        std::cout<<"System zarzadzania finansami"<<std::endl;
-        std::cout<<"-----------------------------"<<std::endl;
-        std::cout<<"Wybierz opcje:"<<std::endl;
-        std::cout<<"1. Zarządzanie przychodami i wydatkami"<<std::endl;
-        std::cout<<"2. Analiza finansowa"<<std::endl;
-        std::cout<<"3. Planowanie budżetu"<<std::endl;
-        std::cout<<"4. Generowanie raportów"<<std::endl;
-        std::cout<<"5. Wyjście"<<std::endl;
+        int error_flag = 0;
+        std::cout << "System zarzadzania finansami" << std::endl;
+        std::cout << "-----------------------------" << std::endl;
+        std::cout << "Wybierz opcje:" << std::endl;
+        std::cout << "1. Zarządzanie przychodami i wydatkami" << std::endl;
+        std::cout << "2. Analiza finansowa" << std::endl;
+        std::cout << "3. Planowanie budżetu" << std::endl;
+        std::cout << "4. Generowanie raportów" << std::endl;
+        std::cout << "5. Wyjście" << std::endl;
         int choice;
-        std::cin>>choice;
+        std::cin >> choice;
+
+        // Sprawdzanie czy cin jest poprawny
+        if (std::cin.fail()) { // Sprawdzenie, czy odczyt wartości się nie powiódł
+            handleInputError();
+            continue; // Powrót do menu głównego
+        }
 
         // Zarzadzanie przychodami i wydatkami
         if (choice == 1) {
             while (1) {
+                TransactionManager manager;
                 std::system("cls");
                 std::cout << "Zarządzanie przychodami i wydatkami" << std::endl;
                 std::cout << "------------------------------------" << std::endl;
@@ -35,15 +48,48 @@ int main() {
                 std::cin >> choice2;
                 if (choice2 == 1) {
                     // Dodawanie transakcji
+                    std::string type, category, date, description;
+                    double amount;
+                    std::cout << "Podaj tytuł transakcji: \n";
+                    std::cin >> type;
+                    std::cout << "Podaj kategorię transakcji: \n";
+                    std::cin >> category;
+                    std::cout << "Podaj datę transakcji: \n";
+                    std::cin >> date;
+                    std::cout << "Podaj opis: \n";
+                    std::cin >> description;
+                    std::cout << "Podaj kwotę: \n";
+                    std::cin >> amount;
+
+                    try {
+                        std::cout << "DUPA";
+                        //manager.addTransaction(type, category, date, description, amount);
+                        manager.addTransaction("Income", "Salary", "2022-01-01", "January Salary", 5000);
+                    //    manager.addTransaction("Expense", "Rent", "2022-01-02", "January Rent", -2000);
+                        
+                    }
+                    catch (const std::invalid_argument& e) {
+                        std::cerr << "Error: " << e.what() << std::endl;
+                    }
+
+                    
                 }
                 else if (choice2 == 2) {
-                    // Wyswietlanie transakcji
+                    try{
+                        manager.printTransactions();
+					}
+					catch (const std::invalid_argument& e) {
+						std::cerr << "Error: " << e.what() << std::endl;
+                    }
+                    
+
                 }
                 else if (choice2 == 3) {
                     break;
                 }
                 else {
-                    std::cout << "Nieprawidłowy wybór. Spróbuj ponownie." << std::endl;
+                    handleInputError();
+                    continue;
                 }
             }
         }
@@ -86,7 +132,8 @@ int main() {
                             break;
                         }
                         else {
-                            std::cout << "Nieprawidłowy wybór. Spróbuj ponownie." << std::endl;
+                            handleInputError();
+                            continue;
                         }
                     }
                 }
@@ -97,7 +144,8 @@ int main() {
                     break;
                 }
                 else {
-                    std::cout << "Nieprawidłowy wybór. Spróbuj ponownie." << std::endl;
+                    handleInputError();
+                    continue;
                 }
             }
         }
@@ -117,13 +165,14 @@ int main() {
                     // Ustalanie budzetu
                 }
                 if (choice2 == 2) {
-                    // Monitorowanie post�p�w
+                    // Monitorowanie postępów
                 }
                 if (choice2 == 3) {
                     break;
                 }
                 else {
-                    std::cout << "Nieprawidłowy wybór. Spróbuj ponownie." << std::endl;
+                    handleInputError();
+                    continue;
                 }
             }
         }
@@ -147,7 +196,7 @@ int main() {
                     // Generowanie raportu rocznego
                 }
                 if (choice2 == 3) {
-                    // Generowanie raportu por�wnawczego
+                    // Generowanie raportu porównawczego
                 }
                 if (choice2 == 4) {
                     // Generowanie raportu z najwiekszymi wydatkami w danej kategorii
@@ -156,30 +205,18 @@ int main() {
                     break;
                 }
                 else {
-                    std::cout << "Nieprawidłowy wybór. Spróbuj ponownie." << std::endl;
+                    handleInputError();
+                    continue;
                 }
             }
         }
         // Wyjscie
         if (choice == 5) {
-			break;
-		}
-        else {
-			std::cout<<"Nieprawidlowy wybor. Sprobuj ponownie."<<std::endl;
-            continue;
-		}
+            break;
+        }
 
- 
 
-    }
-    TransactionManager manager;
-    try {
-        manager.addTransaction("Income", "Salary", "2022-01-01", "January Salary", 5000);
-        manager.addTransaction("Expense", "Rent", "2022-01-02", "January Rent", -2000);
-        manager.printTransactions();
-    }
-    catch (const std::invalid_argument& e) {
-        std::cerr << "Error: " << e.what() << std::endl;
+
     }
     return 0;
 }
