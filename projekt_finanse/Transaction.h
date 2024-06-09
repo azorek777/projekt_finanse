@@ -1,25 +1,27 @@
-// Transaction.h
+#ifndef TRANSACTION_H
+#define TRANSACTION_H
+
 #include <string>
-#include <vector>
+
+enum class TransactionType { Income, Expense };
 
 class Transaction {
 private:
-    std::string type;
+    TransactionType type;
     std::string category;
     std::string date;
     std::string description;
     double amount;
 
 public:
-    Transaction(std::string type, std::string category, std::string date, std::string description, double amount);
-    void print() const;
+    Transaction(TransactionType type, const std::string& category, const std::string& date, const std::string& description, double amount);
+
+    TransactionType getType() const;
+    std::string getCategory() const;
+    std::string getDate() const;
+    std::string getDescription() const;
+    double getAmount() const;
 };
 
-class TransactionManager {
-private:
-    std::vector<Transaction> transactions;
+#endif // TRANSACTION_H
 
-public:
-    void addTransaction(std::string type, std::string category, std::string date, std::string description, double amount);
-    void printTransactions();
-};
