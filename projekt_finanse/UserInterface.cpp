@@ -1,4 +1,4 @@
-#include "UserInterface.h"
+ï»¿#include "UserInterface.h"
 #include <iostream>
 #include <limits>
 
@@ -31,9 +31,9 @@ void UserInterface::addTransaction() {
             throw TransactionException("Amount must be positive.");
         }
         if (std::cin.fail() || std::cin.peek() != '\n') {
-            // Wyczyœæ stan b³êdu std::cin
+            // WyczyÅ›Ä‡ stan bÅ‚Ä™du std::cin
             std::cin.clear();
-            // Wyczyœæ bufor wejœcia, aby usun¹æ pozosta³oœci po nieprawid³owym wprowadzeniu
+            // WyczyÅ›Ä‡ bufor wejÅ›cia, aby usunÄ…Ä‡ pozostaÅ‚oÅ›ci po nieprawidÅ‚owym wprowadzeniu
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             throw TransactionException("Invalid input. Should be a number.");
         }
@@ -54,9 +54,9 @@ void UserInterface::setBudget() {
     std::cout << "Enter budget amount: ";
     std::cin >> amount;
     if (std::cin.fail() || std::cin.peek() != '\n') {
-        // Wyczyœæ stan b³êdu std::cin
+        // WyczyÅ›Ä‡ stan bÅ‚Ä™du std::cin
         std::cin.clear();
-        // Wyczyœæ bufor wejœcia, aby usun¹æ pozosta³oœci po nieprawid³owym wprowadzeniu
+        // WyczyÅ›Ä‡ bufor wejÅ›cia, aby usunÄ…Ä‡ pozostaÅ‚oÅ›ci po nieprawidÅ‚owym wprowadzeniu
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         throw TransactionException("Invalid input. Should be a number.");
     }
@@ -182,6 +182,8 @@ void UserInterface::displayMonthlyAverageExpenses() const {
     }
 }
 
+UserInterface::UserInterface(FinanceManager& manager) : manager(manager) {}
+
 void UserInterface::start() {
     while (true) {
         std::cout << "1. Add transaction\n";
@@ -197,9 +199,9 @@ void UserInterface::start() {
 
         try {
             if (std::cin.fail() || std::cin.peek() != '\n') {
-                // Wyczyœæ stan b³êdu std::cin
+                // WyczyÅ›Ä‡ stan bÅ‚Ä™du std::cin
                 std::cin.clear();
-                // Wyczyœæ bufor wejœcia, aby usun¹æ pozosta³oœci po nieprawid³owym wprowadzeniu
+                // WyczyÅ›Ä‡ bufor wejÅ›cia, aby usunÄ…Ä‡ pozostaÅ‚oÅ›ci po nieprawidÅ‚owym wprowadzeniu
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 throw TransactionException("Invalid input. Should be a number.");
             }

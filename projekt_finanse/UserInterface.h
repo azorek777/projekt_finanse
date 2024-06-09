@@ -15,6 +15,7 @@ private:
     void displayMonthlyAverageExpenses() const;
 
 public:
+    UserInterface(FinanceManager& manager);
     void start();
 };
 

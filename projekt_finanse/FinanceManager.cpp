@@ -214,7 +214,7 @@ void FinanceManager::generateExpensePieChartData(const std::string& date, const 
             url << "|";
         }
         double percentage = (amount / totalExpenses) * 100.0;
-        url << category << " (" << std::fixed << std::setprecision(2) << amount << " = " << percentage << "%)";
+        url << category << "%28" << std::fixed << std::setprecision(2) << amount << "%29"; // %28 to '(' i %29 to ')'
         first = false;
     }
 
@@ -271,7 +271,6 @@ std::map<std::string, double> FinanceManager::calculateMonthlyAverageExpenses(co
 
     return averageExpenses;
 }
-
 
 
 

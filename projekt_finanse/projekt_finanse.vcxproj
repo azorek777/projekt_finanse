@@ -104,6 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -127,11 +128,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FinanceManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Transaction.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FinanceManager.h" />
     <ClInclude Include="Transaction.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
