@@ -71,7 +71,7 @@ int main() {
     manager.addTransaction(Transaction(TransactionType::Expense, "Travel", "2024-04-20", "Train tickets", 150));
 
     UserInterface ui(manager);
-    ui.start(); // Uruchomienie interfejsu u¿ytkownika lub g³ównej pêtli programu
+    ui.start(); // Uruchomienie interfejsu u¿ytkownika
 
     return 0;
 }

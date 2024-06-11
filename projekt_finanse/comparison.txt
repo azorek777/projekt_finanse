@@ -1,0 +1,6 @@
+Comparison Report for 2023-01 and 2023-03
+----------------------------------
+Category | 2023-01 | 2023-03
+Groceries | -180 | 0
+Rent | -1350 | 0
+Salary | 5300 | 5300

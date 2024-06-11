@@ -35,6 +35,7 @@ public:
     std::map<std::string, double> calculateMonthlyAverageExpenses(const std::string& month) const;
 };
 
+// klasa wyj¹tku dla b³êdów transakcji
 class TransactionException : public std::exception {
 public:
     explicit TransactionException(const std::string& message) : msg_(message) {}

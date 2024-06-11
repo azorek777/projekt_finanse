@@ -3,6 +3,7 @@
 
 #include <string>
 
+// typ wyliczeniowy dla typu transakcji
 enum class TransactionType { Income, Expense };
 
 class Transaction {
